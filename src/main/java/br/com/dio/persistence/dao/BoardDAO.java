@@ -61,5 +61,25 @@ public class BoardDAO {
             return statement.getResultSet().next();
         }
     }
+    
+    public List<BoardEntity> findAll() throws SQLException {
+        var sql = "SELECT id, name FROM BOARDS ORDER BY name;";
+        List<BoardEntity> boards = new ArrayList<>();
+        
+        try(var statement = connection.prepareStatement(sql)){
+            statement.executeQuery();
+            var resultSet = statement.getResultSet();
+            
+            while (resultSet.next()){
+                var entity = new BoardEntity();
+                entity.setId(resultSet.getLong("id"));
+                entity.setName(resultSet.getString("name"));
+                boards.add(entity);
+            }
+        }
+        
+        log.debug("Encontrados {} boards no banco", boards.size());
+        return boards;
+    }
 
 }
