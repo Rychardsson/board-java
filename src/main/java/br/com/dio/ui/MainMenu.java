@@ -51,10 +51,10 @@ public class MainMenu {
                         log.info("Aplicação encerrada pelo usuário");
                         System.exit(0);
                     }
-                    default -> System.out.println("❌ Opção inválida! Escolha uma opção entre 1 e 7.");
+                    default -> System.out.println("❌ Opcao invalida! Escolha uma opcao entre 1 e 7.");
                 }
             } catch (ValidationException e) {
-                System.out.println("❌ Erro de validação: " + e.getMessage());
+                System.out.println("❌ Erro de validacao: " + e.getMessage());
                 log.warn("Erro de validação na interface: {}", e.getMessage());
             } catch (Exception e) {
                 System.out.println("❌ Erro inesperado: " + e.getMessage());
@@ -69,10 +69,10 @@ public class MainMenu {
         System.out.println("=".repeat(40));
         System.out.println("1 📝 Criar um novo board");
         System.out.println("2 📋 Selecionar um board existente");
-        System.out.println("3 🗑️  Excluir um board");
+        System.out.println("3 🗑 Excluir um board");
         System.out.println("4 📊 Listar todos os boards");
-        System.out.println("5 📈 Relatórios");
-        System.out.println("6 ⚡ Métricas de performance");
+        System.out.println("5 📈 Relatorios");
+        System.out.println("6 ⚡ Metricas de performance");
         System.out.println("7 🚪 Sair");
         System.out.println("=".repeat(40));
     }
@@ -150,7 +150,7 @@ public class MainMenu {
                         new BoardMenu(b).execute();
                     },
                     () -> {
-                        System.out.println("❌ Board com ID " + boardId + " não foi encontrado");
+                        System.out.println("❌ Board com ID " + boardId + " nao foi encontrado");
                         log.warn("Tentativa de acesso a board inexistente: {}", boardId);
                     }
             );
@@ -158,14 +158,14 @@ public class MainMenu {
     }
 
     private void deleteBoard() throws SQLException {
-        System.out.println("\n🗑️ EXCLUINDO BOARD");
+        System.out.println("\n🗑 EXCLUINDO BOARD");
         System.out.println("-".repeat(30));
         
         Long boardId = readLongInput("Digite o ID do board que será excluído: ");
         
         String confirmation = readStringInput("Tem certeza? Digite 'CONFIRMAR' para prosseguir: ");
         if (!"CONFIRMAR".equals(confirmation)) {
-            System.out.println("❌ Operação cancelada");
+            System.out.println("❌ Operacao cancelada");
             return;
         }
         
@@ -175,7 +175,7 @@ public class MainMenu {
                 System.out.println("✅ Board " + boardId + " foi excluído com sucesso");
                 log.info("Board excluído: {}", boardId);
             } else {
-                System.out.println("❌ Board com ID " + boardId + " não foi encontrado");
+                System.out.println("❌ Board com ID " + boardId + " nao foi encontrado");
                 log.warn("Tentativa de exclusão de board inexistente: {}", boardId);
             }
         }
@@ -214,7 +214,7 @@ public class MainMenu {
             case 1 -> generateProductivityReport();
             case 2 -> generateOldCardsReport();
             case 3 -> { /* Volta ao menu principal */ }
-            default -> System.out.println("❌ Opção inválida");
+            default -> System.out.println("❌ Opcao invalida");
         }
     }
     
@@ -226,7 +226,7 @@ public class MainMenu {
             var report = reportService.generateBoardProductivityReport(boardId);
             report.printReport();
         } catch (Exception e) {
-            System.out.println("❌ Erro ao gerar relatório: " + e.getMessage());
+            System.out.println("❌ Erro ao gerar relatorio: " + e.getMessage());
             log.error("Erro ao gerar relatório de produtividade", e);
         }
     }
@@ -239,7 +239,7 @@ public class MainMenu {
             var report = reportService.generateOldCardsReport(days);
             report.printReport();
         } catch (Exception e) {
-            System.out.println("❌ Erro ao gerar relatório: " + e.getMessage());
+            System.out.println("❌ Erro ao gerar relatorio: " + e.getMessage());
             log.error("Erro ao gerar relatório de cards antigos", e);
         }
     }
@@ -279,13 +279,6 @@ public class MainMenu {
         } catch (Exception e) {
             scanner.nextLine(); // Limpa o buffer
             throw new ValidationException("Entrada deve ser um número válido");
-        }
-    }
-            if (service.delete(id)){
-                System.out.printf("O board %s foi excluido\n", id);
-            } else {
-                System.out.printf("Não foi encontrado um board com id %s\n", id);
-            }
         }
     }
 
