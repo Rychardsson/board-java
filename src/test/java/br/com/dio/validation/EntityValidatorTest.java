@@ -68,7 +68,10 @@ class EntityValidatorTest {
         column.setName("Final");
         column.setKind(BoardColumnKindEnum.FINAL);
         column.setOrder(0);
-        board.setBoardColumns(List.of(column));
+        
+        List<BoardColumnEntity> newColumns = new ArrayList<>();
+        newColumns.add(column);
+        board.setBoardColumns(newColumns);
         
         // When & Then
         assertThatThrownBy(() -> EntityValidator.validateBoard(board))
@@ -143,7 +146,10 @@ class EntityValidatorTest {
         finalColumn.setKind(BoardColumnKindEnum.FINAL);
         finalColumn.setOrder(1);
         
-        board.setBoardColumns(List.of(initialColumn, finalColumn));
+        List<BoardColumnEntity> columns = new ArrayList<>();
+        columns.add(initialColumn);
+        columns.add(finalColumn);
+        board.setBoardColumns(columns);
         
         return board;
     }
