@@ -47,15 +47,15 @@ public class ReportService {
         // Calcula métricas por coluna
         Map<String, Long> cardsByColumn = boardDetails.columns().stream()
             .collect(Collectors.toMap(
-                col -> col.getName(),
+                col -> col.name(),
                 col -> {
                     try {
                         CardSearchCriteria criteria = CardSearchCriteria.builder()
-                            .boardColumnIds(List.of(col.getId()))
+                            .boardColumnIds(List.of(col.id()))
                             .build();
                         return cardDAO.countByCriteria(criteria);
                     } catch (SQLException e) {
-                        log.error("Erro ao contar cards da coluna {}", col.getId(), e);
+                        log.error("Erro ao contar cards da coluna {}", col.id(), e);
                         return 0L;
                     }
                 }
