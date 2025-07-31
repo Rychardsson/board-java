@@ -34,10 +34,18 @@ public class ReportService {
         
         // Busca detalhes do board
         BoardDetailsDTO boardDetails = boardDAO.findById(boardId)
+            .map(board -> {
+                try {
+                    BoardQueryService queryService = new BoardQueryService(connection);
+                    return queryService.showBoardDetails(boardId).orElse(null);
+                } catch (SQLException e) {
+                    throw new RuntimeException("Erro ao buscar detalhes do board", e);
+                }
+            })
             .orElseThrow(() -> new RuntimeException("Board não encontrado: " + boardId));
         
         // Calcula métricas por coluna
-        Map<String, Long> cardsByColumn = boardDetails.getBoardColumns().stream()
+        Map<String, Long> cardsByColumn = boardDetails.columns().stream()
             .collect(Collectors.toMap(
                 col -> col.getName(),
                 col -> {
@@ -68,7 +76,7 @@ public class ReportService {
         
         return new BoardProductivityReport(
             boardId,
-            boardDetails.getName(),
+            boardDetails.name(),
             totalCards,
             blockedCards,
             cardsByColumn,

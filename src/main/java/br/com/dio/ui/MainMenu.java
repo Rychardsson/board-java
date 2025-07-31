@@ -81,7 +81,7 @@ public class MainMenu {
         System.out.println("\n📝 CRIANDO NOVO BOARD");
         System.out.println("-".repeat(30));
         
-        return metricsCollector.measureOperation("create_board", () -> {
+        metricsCollector.measureOperation("create_board", () -> {
             try {
                 var entity = new BoardEntity();
                 
@@ -130,7 +130,6 @@ public class MainMenu {
                 throw new RuntimeException("Erro ao salvar board no banco de dados", e);
             }
             
-            return null;
         });
     }
 

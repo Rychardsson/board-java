@@ -35,8 +35,8 @@ public class Main {
             
         } catch (SQLException e) {
             log.error("Erro de conexão com banco de dados", e);
-            System.err.println("❌ Erro de conexão com banco de dados: " + e.getMessage());
-            System.err.println("Verifique se o MySQL está rodando e as credenciais estão corretas.");
+            System.err.println("❌ Erro de conexao com banco de dados: " + e.getMessage());
+            System.err.println("Verifique se o MySQL esta rodando e as credenciais estao corretas.");
             System.exit(1);
             
         } catch (Exception e) {

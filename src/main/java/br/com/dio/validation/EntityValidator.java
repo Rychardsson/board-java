@@ -1,5 +1,6 @@
 package br.com.dio.validation;
 
+import br.com.dio.exception.ValidationException;
 import br.com.dio.persistence.entity.BoardEntity;
 import br.com.dio.persistence.entity.BoardColumnEntity;
 import br.com.dio.persistence.entity.CardEntity;
